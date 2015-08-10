@@ -1,0 +1,98 @@
+@import '../Base/Base';
+.Search {
+    height: 100%;
+    &-box {
+        padding: 15px;
+        width: 20%;
+        height: 100%;
+        display: inline-block;
+        float: left;
+        position: relative;
+        .input-box {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        input.keyword-input {
+            height: 34px;
+            width: 100%;
+            border: 2px solid #6B6B6B;
+            border-radius: 4px;
+            color: #6B6B6B;
+            background: transparent;
+            padding: 0 10px;
+            font-style: 1.4rem;
+            font-weight: bold;
+        }
+        button.search-button {
+            position: absolute;
+            color: #6B6B6B;
+            top: 5px;
+            right: 4px;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+        ul.keyword-list-box {
+            li {
+                color: #6B6B6B;
+                font-size: 1.4rem;
+                list-style: none;
+                padding: 5px 8px;
+                cursor: pointer;
+                &:hover {
+                    border-radius: 4px;
+                    color: white;
+                }
+            }
+        }
+    }
+    &-result {
+        overflow-y: auto;
+        height: 100%;
+        width: 80%;
+        display: inline-block;
+        float: left;
+        .provider-name {
+            font-size: 1.8rem;
+            color: #404040;
+            font-weight: bold;
+            float: left;
+            width: 100%;
+            padding: 15px;
+        }
+        .result-item {
+            width: 230px;
+            height: 260px;
+            padding: 15px;
+            float: left;
+            display: inline-block;
+        }
+        .image-box {
+            width: 200px;
+            height: 120px;
+            .result-image {
+                .background-size();
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+                margin-bottom: 6px;
+                border: 1px solid black;
+                -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+            }
+        }
+        a.result-title {
+            color: white;
+            font-size: 1.6rem;
+            font-weight: bold;
+            max-height: 76px;
+            display: block;
+            overflow: hidden;
+            margin-bottom: 2px;
+        }
+        p.result-other {
+            color: #6B6B6B;
+            font-size: 1.2rem;
+        }
+    }
+}

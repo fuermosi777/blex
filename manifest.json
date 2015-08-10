@@ -1,0 +1,22 @@
+{
+    "name": "Blex",
+    "description": "A media center in Chrome",
+    "version": "0.1",
+    "manifest_version": 2,
+    "app": {
+        "background": {
+            "scripts": ["background.js"]
+        }
+    },
+    "permissions": [
+        "webview",
+        "http://*/",
+        "unlimitedStorage",
+        "<all_urls>"
+    ],
+    "icons": {
+        "16": "16x16.png",
+        "128": "128x128.png"
+    },
+    "minimum_chrome_version": "28"
+}
