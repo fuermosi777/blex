@@ -4,11 +4,13 @@
   "description": "",
   "main": "background.js",
   "scripts": {
+    "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "gulp": "^3.9.0",
     "jquery": "^2.1.4",
     "react-hot-loader": "^1.2.8",
     "webpack": "^1.11.0"
