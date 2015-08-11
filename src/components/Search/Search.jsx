@@ -9,7 +9,8 @@ export default React.createClass({
     getInitialState() {
         let state = {
             keyword: '',
-            keywordList: []
+            keywordList: [],
+            showShadow: false
         };
         for (let i = 0; i < ServiceProviders.length; i++) {
             state[ServiceProviders[i].name] = []
@@ -17,18 +18,31 @@ export default React.createClass({
         return state;
     },
 
+    componentDidMount() {
+        React.findDOMNode(this.refs.searchResult).addEventListener('scroll', this.handleScroll);
+    },
+
+    componentWillUnmount() {
+        React.findDOMNode(this.refs.searchResult).removeEventListener('scroll', this.handleScroll);
+    },
+
     render() {
         // build result list
+        let resultLength = 0;
         let ResultList = [];
         for (let i = 0; i < ServiceProviders.length; i++) {
             if (this.state[ServiceProviders[i].name].length > 0) {
                 ResultList.push(<div className="provider-name">{ServiceProviders[i].title}</div>);
                 ResultList.push(this.state[ServiceProviders[i].name].map((item) => {
+                    resultLength++;
                     return (
                         <div className="result-item">
-                            <div className="image-box">
-                                <div className="result-image" style={{backgroundImage: 'url(' + item.img + ')'}}></div>
-                            </div>
+                            <a href={item.url} target="_blank">
+                                <div className="image-box">
+                                    <img className="frost" src={require('./frost.svg')}/>
+                                    <div className="result-image" style={{backgroundImage: 'url(' + item.img + ')'}}></div>
+                                </div>
+                            </a>
                             <a href={item.url} target="_blank" className="result-title">{item.title}</a>
                             <p className="result-other">{item.other || ''}</p>
                         </div>
@@ -58,8 +72,14 @@ export default React.createClass({
                         {KeywordList}
                     </ul>
                 </div>
-                <div className="Search-result">
-                    {ResultList}
+                {resultLength !== 0 ? <div className="Search-title">
+                    <div className="result-length">
+                        共找到 <span className="num">{resultLength}</span> 个视频
+                    </div>
+                </div> : ''}
+                <div className={"Search-shadow" + (this.state.showShadow ? ' active' : '')}></div>
+                <div className="Search-result" ref="searchResult">
+                    {resultLength !== 0 ? ResultList : <h1 className="blex">Blex</h1>}
                 </div>
             </div>
         )
@@ -69,7 +89,6 @@ export default React.createClass({
         this.setState({keyword: e.target.value});
         KeywordService.tencent(e.target.value)
             .then((res) => {
-                console.log(res);
                 this.setState({keywordList: res});
             })
             .catch((err) => {
@@ -97,6 +116,14 @@ export default React.createClass({
                         // pass
                     }
                 });
+        }
+    },
+
+    handleScroll(e) {
+        if (e.target.scrollTop >= 10) {
+            this.setState({showShadow: true});
+        } else {
+            this.setState({showShadow: false});
         }
     }
 });

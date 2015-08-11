@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200px" height="120px" viewBox="0 0 200 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>path-2 copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="25.3671875%" y1="-35.8793467%" x2="51.0095911%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.120697464" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M0,3.99261475 C0,1.78755451 1.79010294,0 3.99507582,0 L196.004924,0 C198.211344,0 200,1.7849243 200,4.00124353 L200,6.66281897 C200,8.87264475 198.433728,11.5203118 196.486305,12.5849283 L3.51369525,118.079134 C1.57313495,119.139999 0,118.210539 0,116.007385 L0,3.99261475 L0,3.99261475 Z" id="path-2-copy" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup"></path>
+    </g>
+</svg>
