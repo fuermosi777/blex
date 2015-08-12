@@ -119,12 +119,13 @@ export default {
                         return Promise.reject('NO_RESULT');
                     } else {
                         let imageLoaders = res.d.map((item) => {
+                            console.log(item);
                             if (item.i && item.n) {
                                 return Basic.loadImage({
                                     img: item.i,
                                     title: item.n,
-                                    url: item.u,
-                                    other: item.c
+                                    url: item.u || item.d,
+                                    other: item.c 
                                 });
                             } else {
                                 return;
