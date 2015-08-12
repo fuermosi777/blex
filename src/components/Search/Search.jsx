@@ -81,7 +81,7 @@ export default React.createClass({
                         {KeywordList}
                     </ul>
                     <div className="info">
-                        <a href="http://liuhao.im" target="_blank"><i class="fa fa-exclamation-circle"></i> Hao &copy; Blex v0.0.1</a>
+                        <a href="http://liuhao.im" target="_blank"><i class="fa fa-exclamation-circle"></i> Hao &copy; Blex v0.0.3</a>
                     </div>
                 </div>
             </div>
