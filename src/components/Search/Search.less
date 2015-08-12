@@ -3,7 +3,7 @@
     height: 100%;
     &-box {
         padding: 15px;
-        width: 20%;
+        width: 200px;
         height: 100%;
         display: inline-block;
         float: left;
@@ -22,11 +22,18 @@
             padding: 0 10px;
             font-style: 1.4rem;
             font-weight: bold;
+            .transition(0.3s);
+            &:active,
+            &:focus {
+                color: white;
+                border-color: white;
+                box-shadow: 0px 0px 15px rgb(30, 142, 255);
+            }
         }
         button.search-button {
             position: absolute;
             color: #545759;
-            top: 5px;
+            top: 6px;
             right: 4px;
             background: none;
             border: none;
@@ -49,13 +56,25 @@
                 }
             }
         }
+        .info {
+            a {
+                position: absolute;
+                left: 15px;
+                bottom: 15px;
+                color: #545759;
+                font-size: 1.3rem;
+                &:hover {
+                    color: white;
+                }
+            }
+        }
     }
     &-title {
         position: fixed;
         width: 80%;
         top: 0;
         right: 0;
-        height: 68px;
+        height: 62px;
         z-index: 9;
         padding: 15px;
         .result-length {
@@ -71,12 +90,12 @@
         position: fixed;
         width: 80%;
         height: 20px;
-        top: 68px;
+        top: 62px;
         right: 0;
         z-index: 9;
         overflow: hidden;
         &.active {
-            border-bottom: 2px solid #000000;
+            border-top: 1px solid #000000;
             &:after {
                 content: '';
                 display: block;
@@ -91,11 +110,14 @@
     &-result {
         overflow-y: auto;
         height: 100%;
-        width: 80%;
-        display: inline-block;
-        float: left;
-        margin-top: 68px;
-        padding-bottom: 68px;
+        width: 100%;
+        min-width: 400px;
+        margin-top: 62px;
+        padding-bottom: 62px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding-left: 200px;
         .provider-name {
             font-size: 1.8rem;
             color: #404040;
@@ -116,6 +138,7 @@
             font-size: 8rem;
             font-weight: bold;
             position: absolute;
+            margin-top: -62px;
             top: 50%;
             .transformTranslateY(-50%);
             text-shadow: 0px 0px 25px rgb(30, 142, 255);

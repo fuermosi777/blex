@@ -15,7 +15,6 @@ export default {
                     if (res.head.num === 0) {
                         return Promise.reject('NO_RESULT');
                     } else {
-                        let resArray = [];
                         let imageLoaders = res.item.map((item) => {
                             if (item.url && item.dc) {
                                 return Basic.loadImage({
@@ -90,16 +89,17 @@ export default {
         return new Promise((resolve, reject) => {
             Ajax.GET(url)
                 .then((res) => {
-                    let doc = (new DOMParser).parseFromString(res, 'text/html');
-                    let items = doc.querySelectorAll('.So-detail.Movie-so');
-                    let imageLoaders = Array.prototype.slice.call(items).map((item) => {
-                        if (item.querySelector('a.ico_play')) {
+                    res = JSON.parse(res);
+                    let imageLoaders = res.map((item) => {
+                        if (item.latest_video) {
                             return Basic.loadImage({
-                                img: item.querySelector('.left a img').src,
-                                title: item.querySelector('.left a img').title,
-                                url: item.querySelector('.left a').href,
-                                other: item.querySelector('.info-tit p').innerText
+                                img: item.pcjs_post_st,
+                                title: item.name,
+                                url: 'http://www.letv.com/ptv/vplay/' + item.latest_video + '.html',
+                                other: item.category
                             });
+                        } else {
+                            return;
                         }
                     });
                     return Promise.all(imageLoaders);
@@ -114,19 +114,24 @@ export default {
         return new Promise((resolve, reject) => {
             Ajax.GET(url)
                 .then((res) => {
-                    let doc = (new DOMParser).parseFromString(res, 'text/html');
-                    let items = doc.querySelectorAll('.item');
-                    let imageLoaders = Array.prototype.slice.call(items).map((item) => {
-                        if (item.querySelector('.playarea a.s_btn.btn_play')) {
-                            return Basic.loadImage({
-                                img: item.querySelector('li.p_thumb img').src,
-                                title: item.querySelector('li.p_thumb img').alt,
-                                url: item.querySelector('.s_btn.btn_play').href,
-                                other: item.querySelector('ul.base li.base_pub').innerText.replace(/[\(\)']+/g,'')
-                            });
-                        }
-                    });
-                    return Promise.all(imageLoaders);
+                    res = JSON.parse(res);
+                    if (!res.d) {
+                        return Promise.reject('NO_RESULT');
+                    } else {
+                        let imageLoaders = res.d.map((item) => {
+                            if (item.i && item.n) {
+                                return Basic.loadImage({
+                                    img: item.i,
+                                    title: item.n,
+                                    url: item.u,
+                                    other: item.c
+                                });
+                            } else {
+                                return;
+                            }
+                        });
+                        return Promise.all(imageLoaders);    
+                    }  
                 })
                 .then((res) => {
                     resolve(Basic.cleanArray(res));
@@ -142,17 +147,22 @@ export default {
                     let items = doc.querySelectorAll('ol.item-section li .yt-lockup-dismissable');
                     let imageLoaders = Array.prototype.slice.call(items).map((item) => {
                         let imgMatches = item.querySelector('.yt-thumb.video-thumb img').outerHTML.match(/src="\/\/(.[^\s]*)"/) || item.querySelector('.yt-thumb.video-thumb img').outerHTML.match(/data-thumb="\/\/(.[^\s]*)"/);
-                        return Basic.loadImage({
-                            img: 'http://' + imgMatches[1],
-                            title: item.querySelector('h3.yt-lockup-title a').title,
-                            url: 'https://www.youtube.com' + item.querySelector('a.yt-uix-sessionlink').outerHTML.match(/href="(.[^\s]*)"/)[1],
-                            other: item.querySelector('.yt-lockup-byline a').innerText
-                        });
+                        let time_ = item.querySelector('.video-time');
+                        let time = time_ ? time_.innerText.split(':') : null;
+                        let isLongEnough = (!time || (time.length === 2 && parseInt(time[0]) >= 20) || time.length > 2) ? true : false;
+                        if (isLongEnough) {
+                            return Basic.loadImage({
+                                img: 'http://' + imgMatches[1],
+                                title: item.querySelector('h3.yt-lockup-title a').title,
+                                url: 'https://www.youtube.com' + item.querySelector('a.yt-uix-sessionlink').outerHTML.match(/href="(.[^\s]*)"/)[1],
+                                other: item.querySelector('.yt-lockup-byline a').innerText
+                            });
+                        }
                     });
                     return Promise.all(imageLoaders);
                 })
                 .then((res) => {
-                    resolve(res);
+                    resolve(Basic.cleanArray(res));
                 });
         });
     }

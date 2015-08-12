@@ -63,15 +63,6 @@ export default React.createClass({
 
         return (
             <div className="Search">
-                <div className="Search-box">
-                    <div className="input-box">
-                        <input className="keyword-input" onChange={this.handleKeywordInputChange}/>
-                        <button className="search-button" onClick={this.handleSearchButtonClick}><i className="fa fa-search"></i></button>
-                    </div>
-                    <ul className="keyword-list-box">
-                        {KeywordList}
-                    </ul>
-                </div>
                 {resultLength !== 0 ? <div className="Search-title">
                     <div className="result-length">
                         共找到 <span className="num">{resultLength}</span> 个视频
@@ -80,6 +71,18 @@ export default React.createClass({
                 <div className={"Search-shadow" + (this.state.showShadow ? ' active' : '')}></div>
                 <div className="Search-result" ref="searchResult">
                     {resultLength !== 0 ? ResultList : <h1 className="blex">Blex</h1>}
+                </div>
+                <div className="Search-box">
+                    <div className="input-box">
+                        <input className="keyword-input" onChange={this.handleKeywordInputChange}/>
+                        <button className="search-button" onClick={this.handleSearchButtonClick}><i className="fa fa-search"></i></button>
+                    </div>
+                    <ul className="keyword-list-box">
+                        {KeywordList}
+                    </ul>
+                    <div className="info">
+                        <a href="http://liuhao.im" target="_blank"><i class="fa fa-exclamation-circle"></i> Hao &copy; Blex v0.0.1</a>
+                    </div>
                 </div>
             </div>
         )
@@ -113,7 +116,7 @@ export default React.createClass({
                 })
                 .catch((err) => {
                     if (err === 'NO_RESULT') {
-                        // pass
+                        // pass TODO
                     }
                 });
         }
