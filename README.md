@@ -4,6 +4,10 @@ A Chrome app for integrated searching primary video/media/entertainment sites in
 
 #Install
 
+From Chrome app store: [Download link](https://chrome.google.com/webstore/detail/blex/chephcamhakkhojodkfalpickaollbic)
+
+From `.crx` file:
+
 1. [Download `.crx` file](https://github.com/fuermosi777/blex/releases)
 2. Use Chrome open [chrome://extensions/](chrome://extensions/)
 3. Make sure "Developer mode" on top right corner is checked
